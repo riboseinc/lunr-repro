@@ -1,6 +1,8 @@
 Test case for Lunr Japanese search.
 
-To start: `yarn install`.
+Requirements: Node (tested on 22, but should work on most versions) and Yarn.
+
+To set up: `yarn install`.
 
 To run the test: `yarn build && node lunr-repro.mjs`.
 
