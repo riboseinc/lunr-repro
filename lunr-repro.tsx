@@ -8,7 +8,8 @@ import enableTinyLunrSegmenter from 'lunr-languages/tinyseg';
 import enableLunrFr from 'lunr-languages/lunr.fr';
 import enableLunrJa from 'lunr-languages/lunr.ja';
 
-// These two must be done before enabling lunr.ja:
+// These two must be done before enabling lunr.ja
+// (cf. https://github.com/MihaiValentin/lunr-languages/issues/42):
 enableTinyLunrSegmenter(lunr);
 enableLunrStemmer(lunr);
 
