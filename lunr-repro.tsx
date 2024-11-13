@@ -1,3 +1,5 @@
+// Set up Lunr
+
 import lunr from 'lunr';
 import { type Index as LunrIndex } from 'lunr';
 
@@ -6,10 +8,14 @@ import enableTinyLunrSegmenter from 'lunr-languages/tinyseg';
 import enableLunrFr from 'lunr-languages/lunr.fr';
 import enableLunrJa from 'lunr-languages/lunr.ja';
 
+// These two must be done before enabling lunr.ja:
 enableTinyLunrSegmenter(lunr);
 enableLunrStemmer(lunr);
+
 enableLunrJa(lunr);
 
+
+// Show search UI
 
 import { TextInput } from '@inkjs/ui';
 import React, { useMemo, useState } from 'react';

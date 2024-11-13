@@ -17,3 +17,8 @@ Searching with query “標準”, the first document matches as expected.
 
 Searching with query “標準製品”, there are no matches.
 Expected behavior: should match the first document, since it begins with the term.
+
+In `lunr-repro.tsx`:
+
+- Lunr-ja is initialized at the beginning of the file.
+- Search index is initialized within `Search` component (look for `lunrIndex`).
