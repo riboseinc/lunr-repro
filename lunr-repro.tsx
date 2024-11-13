@@ -6,8 +6,8 @@ import enableTinyLunrSegmenter from 'lunr-languages/tinyseg';
 import enableLunrFr from 'lunr-languages/lunr.fr';
 import enableLunrJa from 'lunr-languages/lunr.ja';
 
-enableLunrStemmer(lunr);
 enableTinyLunrSegmenter(lunr);
+enableLunrStemmer(lunr);
 enableLunrJa(lunr);
 
 
@@ -67,7 +67,7 @@ const Index: React.FC<{
       {isFocused
         ? <TextInput
             key={docsIndexed}
-            placeholder="Enter a Japanese string and press enter…"
+            placeholder="Enter or paste a Japanese string and press enter…"
             value={doc}
             isDisabled={!isFocused}
             onChange={setDoc}
