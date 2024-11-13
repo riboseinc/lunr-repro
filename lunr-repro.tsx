@@ -12,7 +12,7 @@ enableLunrJa(lunr);
 
 
 import { TextInput } from '@inkjs/ui';
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import { render, useInput, useFocus, Box, Text } from 'ink';
 
 const Home: React.FC<Record<never, never>> = function () {
@@ -57,10 +57,6 @@ const Index: React.FC<{
   docsIndexed: number;
 }> = function ({ onAddDoc, docsIndexed }) {
   const { isFocused } = useFocus({ autoFocus: true });
-  const [doc, setDoc] = useState('');
-  useEffect(() => {
-    if (!isFocused) { setDoc(' '); }
-  }, [isFocused]);
   return (
     <React.Fragment>
       <Text inverse={isFocused}>Index a document</Text>
@@ -68,10 +64,8 @@ const Index: React.FC<{
         ? <TextInput
             key={docsIndexed}
             placeholder="Enter or paste a Japanese string and press enter…"
-            value={doc}
             isDisabled={!isFocused}
-            onChange={setDoc}
-            onSubmit={val => { onAddDoc(val); setDoc(' ') }}
+            onSubmit={val => { onAddDoc(val) }}
           />
         : <Text> </Text>}
     </React.Fragment>
