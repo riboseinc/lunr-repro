@@ -1,0 +1,17 @@
+Test case for Lunr Japanese search.
+
+To start: `yarn install`.
+
+To run the test: `yarn build && node lunr-repro.mjs`.
+
+Press tab to switch between inputs and search results.
+
+For example, let‘s index these two strings as documents:
+
+- 標準製品仕様は、CityGML及びi-URに準拠して作成され、 Project PLATEAUの2020年度、2021年度、 2022年度及び2023年度の成果を踏まえ、様々な地物やその属性の定義、また、品質要求及び評価手順を示している。さらに、必要な地物等に過不足があった場合に、国際標準に準拠しつつ3D都市モデルをカスタマイズするための規則を示している。そのため、3D都市モデルを整備する場合には、本書を参照することで、国際標準に準拠した3D都市モデルの製品仕様（以下、「拡張製品仕様」と呼ぶ）を作成できる。
+- 3D都市モデルの流通性・再利用性を高め、様々な分野・用途での利用に資するデータとするためには、「標準」に適合することが重要である。本書は、地理空間データに関する標準化団体であるOpen Geospatial Consortium（OGC）が策定した3D 都市モデルのためのオープンデータモデル及びデータ形式の国際標準である「CityGML」と、このCityGMLの拡張規則であるApplication Domain Extension（ADE）に基づき内閣府地方創生推進事務局が都市再生に必要なデータを拡張した「i-都市再生技術仕様（案）」（i-UR）を我が国における3D都市モデルの標準仕様として採用し、「標準製品仕様」として示すものである。
+
+Searching with query “標準”, the first document matches as expected.
+
+Searching with query “標準製品”, there are no matches.
+Expected behavior: should match the first document, since it begins with the term.

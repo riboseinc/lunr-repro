@@ -1,0 +1,20 @@
+{
+  "name": "lunr-repro",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "NODE_ENV=production yarn esbuild lunr-repro.tsx --banner:js='import { createRequire as _createRequire } from \"node:module\"; const require = _createRequire(import.meta.url);' --log-level=debug --platform=node --target=node20 --external:yoga-wasm-web --external:react-devtools-core --minify=false --bundle --format=esm --outfile=lunr-repro.mjs && sed -i '' 's#^import devtools#//import devtools#' lunr-repro.mjs"
+  },
+  "dependencies": {
+    "@inkjs/ui": "^2.0.0",
+    "ink": "^5.0.1",
+    "ink-tab": "^5.1.0",
+    "lunr": "2.3.9",
+    "lunr-languages": "1.14.0",
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.3"
+  }
+}
