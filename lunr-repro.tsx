@@ -36,18 +36,10 @@ const Home: React.FC<Record<never, never>> = function () {
   
   return (
     <Box flexDirection="column">
-      <Box>
-        <Text>Use tab to move around.</Text>
-      </Box>
-      <Box gap={2}>
-        <Index onAddDoc={handleAddDoc} docsIndexed={Object.keys(docs).length} />
-      </Box>
-      <Box gap={2}>
-        <Search query={queryString} onQueryChange={setQueryString} />
-      </Box>
-      <Box flexDirection="column">
-        <Results query={queryString} docs={docs} />
-      </Box>
+      <Text>Use tab to move around.</Text>
+      <Index onAddDoc={handleAddDoc} docsIndexed={Object.keys(docs).length} />
+      <Query query={queryString} onQueryChange={setQueryString} />
+      <Search query={queryString} docs={docs} />
     </Box>
   );
 };
@@ -58,7 +50,7 @@ const Index: React.FC<{
 }> = function ({ onAddDoc, docsIndexed }) {
   const { isFocused } = useFocus({ autoFocus: true });
   return (
-    <React.Fragment>
+    <Box gap={2}>
       <Text inverse={isFocused}>Index a document</Text>
       {isFocused
         ? <TextInput
@@ -68,17 +60,17 @@ const Index: React.FC<{
             onSubmit={val => { onAddDoc(val) }}
           />
         : <Text> </Text>}
-    </React.Fragment>
+    </Box>
   );
 };
 
-const Search: React.FC<{
+const Query: React.FC<{
   query: string;
   onQueryChange: (query: string) => void;
 }> = function ({ query, onQueryChange }) {
   const { isFocused } = useFocus();
   return (
-    <React.Fragment>
+    <Box gap={2}>
       <Text inverse={isFocused}>Search documents</Text>
       <TextInput
         isDisabled={!isFocused}
@@ -86,11 +78,11 @@ const Search: React.FC<{
         value={query}
         onChange={onQueryChange}
       />
-    </React.Fragment>
+    </Box>
   );
 }
 
-const Results: React.FC<{
+const Search: React.FC<{
   query: string;
   docs: Record<string, string>;
 }> = function ({ query, docs }) {
@@ -113,14 +105,17 @@ const Results: React.FC<{
   }, [lunrIndex, query]);
 
   return (
-    <React.Fragment>
+    <Box flexDirection="column">
       {error
         ? <Text>Error searching: {error}</Text>
-        : <Text>{results.length} documents matched:</Text>}
+        : query.trim() !== ''
+          ? <Text>{results.length} documents matched:</Text>
+          // Empty query means all docs are shown
+          : <Text>{Object.keys(docs).length} documents indexed:</Text>}
       <Box flexDirection="column">
         {results.map((res) => <Result key={res.ref} name={res.ref} body={docs[res.ref]} />)}
       </Box>
-    </React.Fragment>
+    </Box>
   );
 }
 
