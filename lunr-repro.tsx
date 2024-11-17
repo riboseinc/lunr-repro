@@ -93,13 +93,6 @@ const Search: React.FC<{
   query: string;
   docs: Record<string, string>;
 }> = function ({ query, docs }) {
-  // example input = 標準製品
-  // in Japanese these are two words, 標準 and 製品. Which will be tokenized in the docs as such (separated).
-  // in order to search for 標準製品. Use the same tokenizer, to separate the query.
-  // create a tokenized query, which should use the function to tokenize the doc
-  const queryTokenized = lunr.ja.tokenizer(query);
-  // turn the array back into proper lunr query search term. such as "標準 製品"
-  const queryTerm = queryTokenized.join(" ");
   const lunrIndex = useMemo(
     () =>
       lunr(function () {
@@ -115,6 +108,13 @@ const Search: React.FC<{
   );
 
   const [results, error] = useMemo(() => {
+    // example input = 標準製品
+    // in Japanese these are two words, 標準 and 製品. Which will be tokenized in the docs as such (separated).
+    // in order to search for 標準製品. Use the same tokenizer, to separate the query.
+    // create a tokenized query, which should use the function to tokenize the doc
+    const queryTokenized = lunr.ja.tokenizer(query);
+    // turn the array back into proper lunr query search term. such as "標準 製品"
+    const queryTerm = queryTokenized.join(" ");
     try {
       return [lunrIndex.search(queryTerm) ?? [], null];
     } catch (e) {
